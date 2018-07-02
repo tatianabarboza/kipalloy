@@ -31,7 +31,6 @@ CREATE TABLE elementopic (
   idKipo int(11) NOT NULL,
   idPic int(11) NOT NULL,
   rotuloDoElemento varchar(1000) DEFAULT NULL,
-  idOrdemMlt int(11) DEFAULT NULL,
   PRIMARY KEY (idElementoPic),
   CONSTRAINT fk_pic FOREIGN KEY (idPic) REFERENCES pic (idPic) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ;
