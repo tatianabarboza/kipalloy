@@ -9,31 +9,49 @@ Passos para executar a ferramenta:
 
 CREATE DATABASE kipoml;
 
-CREATE TABLE pic (
-  idPic int(11) NOT NULL AUTO_INCREMENT,
-  descricaoPic varchar(1000) DEFAULT NULL,
-  datetimePic datetime DEFAULT NULL,
-  PRIMARY KEY (idPic)
-);
+CREATE TABLE `conceitokipo` (
+  `idKipo` int(11) NOT NULL AUTO_INCREMENT,
+  `nomeKipo` varchar(500) DEFAULT NULL,
+  `definicaoKipo` varchar(5000) DEFAULT NULL,
+  `rotuloKipo` varchar(500) DEFAULT NULL,
+  `estruturaLinguistica` varchar(5000) DEFAULT NULL,
+  `labelEstruturaLinguistica` varchar(500) DEFAULT NULL,
+  `instanciaKipo` int(11) DEFAULT NULL,
+  `mensagemIngles` varchar(5000) DEFAULT NULL,
+  `mensagemPortugues` varchar(5000) DEFAULT NULL,
+  PRIMARY KEY (`idKipo`),
+  KEY `instanciaKiPO_idx` (`instanciaKipo`),
+  CONSTRAINT `instanciaKiPO` FOREIGN KEY (`instanciaKipo`) REFERENCES `conceitokipo` (`idKipo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=197 DEFAULT CHARSET=utf8;
 
-CREATE TABLE conceitokipo (
-  idKipo int(11) NOT NULL AUTO_INCREMENT,
-  nomeKipo varchar(500) DEFAULT NULL,
-  definicaoKipo varchar(5000) DEFAULT NULL,
-  rotuloKipo varchar(500) DEFAULT NULL,
-  estruturaLinguistica varchar(5000) DEFAULT NULL,
-  labelEstruturaLinguistica varchar(500) DEFAULT NULL,
-  PRIMARY KEY (idKipo)
-) ;
+CREATE TABLE `picteste` (
+  `idpicteste` int(11) NOT NULL AUTO_INCREMENT,
+  `descricaoPic` varchar(500) DEFAULT NULL,
+  `datetimePic` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idpicteste`)
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8;
 
-CREATE TABLE elementopic (
-  idElementoPic int(11) NOT NULL AUTO_INCREMENT,
-  idKipo int(11) NOT NULL,
-  idPic int(11) NOT NULL,
-  rotuloDoElemento varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (idElementoPic),
-  CONSTRAINT fk_pic FOREIGN KEY (idPic) REFERENCES pic (idPic) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ;
+
+CREATE TABLE `elementopic` (
+  `idElementoPic` int(11) NOT NULL AUTO_INCREMENT,
+  `idpicteste` int(11) NOT NULL,
+  `rotuloDoElemento` varchar(1000) NOT NULL,
+  `idKipo` int(11) NOT NULL,
+  `instancia` varchar(1000) DEFAULT NULL,
+  `especializacao` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`idElementoPic`),
+  KEY `elementopic_id_idx` (`idpicteste`),
+  KEY `elemento_kipo` (`idKipo`),
+  CONSTRAINT `elemento_kipo` FOREIGN KEY (`idKipo`) REFERENCES `conceitokipo` (`idKipo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2693 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ordemmlt` (
+  `idOrdemMlt` int(11) NOT NULL AUTO_INCREMENT,
+  `descOrdemMlt` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`idOrdemMlt`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+
 
 2) Fazer upload do arquivo KIPOMLAlloyTool.jar e salvar no c:\
 
